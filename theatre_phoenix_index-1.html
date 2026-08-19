@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="থিয়েটার ফিনিক্স — মঞ্চ থেকে চলচ্চিত্রে, গল্প থেকে মানুষের কাছে।">
+  <title>থিয়েটার ফিনিক্স | Theatre Phoenix</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+    :root{
+      --bg:#0a0a0a; --panel:#111; --gold:#d6ad55; --text:#f2eee5;
+      --muted:#aaa49a; --line:#292929; --max:1180px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:"Noto Serif Bengali",serif;line-height:1.8}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(92%,var(--max));margin:auto}
+    .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(214,173,85,.15)}
+    .nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px;font-family:"Playfair Display",serif}
+    .brand-mark{width:42px;height:42px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:20px}
+    .brand strong{font-size:20px;letter-spacing:.5px}
+    .brand small{display:block;color:var(--gold);font:12px "Playfair Display",serif;letter-spacing:2px}
+    .links{display:flex;gap:24px;font-size:14px}
+    .links a{color:#ddd;transition:.25s}
+    .links a:hover{color:var(--gold)}
+    .menu{display:none;background:none;border:1px solid var(--line);color:#fff;padding:8px 11px;border-radius:6px;font-size:20px}
+    .hero{min-height:92vh;display:grid;place-items:center;padding:150px 0 80px;position:relative;overflow:hidden;background:
+      radial-gradient(circle at 70% 35%,rgba(214,173,85,.16),transparent 30%),
+      radial-gradient(circle at 15% 80%,rgba(160,30,30,.10),transparent 30%),
+      linear-gradient(135deg,#090909,#111 55%,#080808)}
+    .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.22));pointer-events:none}
+    .hero-content{position:relative;z-index:2;max-width:820px}
+    .eyebrow{color:var(--gold);letter-spacing:4px;font-size:13px;text-transform:uppercase;margin-bottom:20px}
+    h1{font:700 clamp(52px,9vw,105px)/1.02 "Playfair Display","Noto Serif Bengali",serif;letter-spacing:-2px}
+    .hero h1 span{color:var(--gold)}
+    .hero p{max-width:680px;color:#d0ccc4;font-size:clamp(17px,2vw,22px);margin:28px 0}
+    .buttons{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:12px 22px;border:1px solid var(--gold);color:var(--gold);transition:.25s}
+    .btn.primary{background:var(--gold);color:#0a0a0a}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(214,173,85,.15)}
+    section{padding:100px 0;border-bottom:1px solid var(--line)}
+    .section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:42px}
+    .section-head h2{font-size:clamp(30px,4vw,48px);line-height:1.2}
+    .section-head p{color:var(--muted);max-width:520px}
+    .gold{color:var(--gold)}
+    .story{display:grid;grid-template-columns:1.2fr .8fr;gap:60px}
+    .story p{color:#d1cdc5;margin-bottom:18px}
+    .quote{border-left:2px solid var(--gold);padding:25px 28px;background:var(--panel);height:max-content}
+    .quote strong{display:block;color:var(--gold);font-size:22px;margin-bottom:10px}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:linear-gradient(145deg,#151515,#0e0e0e);border:1px solid var(--line);padding:28px;min-height:260px;transition:.3s}
+    .card:hover{transform:translateY(-5px);border-color:rgba(214,173,85,.5)}
+    .card .num{color:var(--gold);font:14px "Playfair Display";letter-spacing:2px}
+    .card h3{font-size:25px;margin:35px 0 10px}
+    .card p{color:var(--muted);font-size:15px}
+    .card a{display:inline-block;margin-top:22px;color:var(--gold)}
+    .mission{background:#0d0d0d}
+    .mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .mission-box{border:1px solid var(--line);padding:38px;background:#111}
+    .mission-box h3{font-size:30px;color:var(--gold);margin-bottom:14px}
+    .mission-box p{color:#ccc}
+    .production{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+    .poster{min-height:390px;border:1px solid var(--line);display:grid;place-items:center;background:linear-gradient(145deg,#1a1a1a,#080808);position:relative;overflow:hidden}
+    .poster span{font:700 58px "Playfair Display";color:var(--gold);letter-spacing:3px}
+    .production-info h3{font-size:42px;margin-bottom:10px}
+    .production-info .meta{color:var(--gold);margin:15px 0}
+    .production-info p{color:#c8c4bc}
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .gallery-item{aspect-ratio:1;display:grid;place-items:center;background:#151515;border:1px solid var(--line);color:#777;font-size:13px}
+    .people{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+    .person{padding:25px;background:#111;border:1px solid var(--line);text-align:center}
+    .avatar{width:92px;height:92px;border-radius:50%;border:1px solid var(--gold);margin:0 auto 15px;display:grid;place-items:center;color:var(--gold);font-size:26px}
+    .person small{color:var(--gold)}
+    .contact{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+    .contact-box{background:#111;border:1px solid var(--line);padding:35px}
+    .contact-box p{color:#ccc;margin:10px 0}
+    footer{padding:45px 0;background:#070707;color:#888}
+    footer .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    footer strong{color:#eee}
+    @media(max-width:900px){
+      .links{display:none;position:absolute;top:76px;left:0;right:0;background:#0b0b0b;padding:20px;flex-direction:column;border-bottom:1px solid var(--line)}
+      .links.open{display:flex}.menu{display:block}
+      .story,.production,.contact,.mission-grid{grid-template-columns:1fr}
+      .cards{grid-template-columns:1fr 1fr}.people{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:560px){
+      section{padding:75px 0}.cards{grid-template-columns:1fr}.people{grid-template-columns:1fr 1fr}
+      .hero{min-height:86vh}.brand strong{font-size:17px}.brand small{font-size:9px}
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#home">
+      <div class="brand-mark">Φ</div>
+      <div><strong>থিয়েটার ফিনিক্স</strong><small>THEATRE PHOENIX</small></div>
+    </a>
+    <button class="menu" aria-label="মেনু" onclick="document.querySelector('.links').classList.toggle('open')">☰</button>
+    <nav class="links">
+      <a href="#home">প্রচ্ছদ</a>
+      <a href="#story">আমাদের গল্প</a>
+      <a href="#philosophy">দর্শন</a>
+      <a href="#stage">মঞ্চ</a>
+      <a href="#film">চলচ্চিত্র</a>
+      <a href="#workshop">কর্মশালা</a>
+      <a href="#gallery">গ্যালারি</a>
+      <a href="#people">আমাদের মানুষ</a>
+      <a href="#contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="container hero-content">
+      <div class="eyebrow">THEATRE • FILM • CULTURE</div>
+      <h1>থিয়েটার <span>ফিনিক্স</span></h1>
+      <p>মঞ্চ থেকে চলচ্চিত্রে, গল্প থেকে মানুষের কাছে। আমরা বিশ্বাস করি—শিল্প শুধু বিনোদন নয়; শিল্প সময়কে দেখে, মানুষকে ছোঁয় এবং প্রশ্ন করতে শেখায়।</p>
+      <div class="buttons">
+        <a class="btn primary" href="#story">আমাদের গল্প</a>
+        <a class="btn" href="#stage">আমাদের কাজ</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="story">
+    <div class="container">
+      <div class="section-head">
+        <div><div class="eyebrow">OUR STORY</div><h2>একটি আগুনপাখির <span class="gold">উড়ে ওঠার গল্প</span></h2></div>
+      </div>
+      <div class="story">
+        <div>
+          <p><strong>১২ জুন, ২০২৫।</strong> মৌখিকভাবে থিয়েটার ফিনিক্সের পথচলা শুরু হয়। গুরুদয়ালের ঘুপচি এক চায়ের আড্ডায় গল্পচ্ছলে এই দলের মোড়ক উন্মোচন। পকেট ফাঁকা, অভিজ্ঞতা নেই—তবুও ছিল কিছু স্বপ্ন।</p>
+          <p>সাংগঠনিক অনভিজ্ঞতা ও পারিপার্শ্বিক বাস্তবতায় পাখিটা প্রায় এক বছর ডানা মেলে স্থির হয়ে ছিল। আমরা কিশোরগঞ্জের সংস্কৃতিতে ব্রাত্য; কাউকে চিনি না, কেউ পাশে দাঁড়াবে—সেই সম্ভাবনাও ক্ষীণ।</p>
+          <p>তারপর আসে একটি দরজা—<strong>কিশোরগঞ্জ থিয়েটার ফোরাম</strong>। নাট্যোৎসবে অংশ নেওয়ার আহ্বান আমাদের স্থবিরতা ভেঙে দেয়। হাতে স্ক্রিপ্ট নেই, লোকবল নেই, কোনো মঞ্চায়নের অভিজ্ঞতাও নেই। তবুও আমরা প্রস্তাবটি লুফে নিই।</p>
+          <p>মাত্র সপ্তাহখানেকের নোটিশে তৈরি হলো একটি পূর্ণাঙ্গ স্ক্রিপ্ট, হলো দুই দিনের কর্মশালা। সাদা চোখে হয়তো সামান্য; আমাদের চোখে বিশাল অর্জন।</p>
+          <p><strong>১২ জুন, ২০২৬</strong>—থিয়েটার ফিনিক্সের আনুষ্ঠানিক উত্থান। এবার ডানা মেলাইনি শুধু; উড়তে শুরু করেছি।</p>
+        </div>
+        <aside class="quote"><strong>“ফিনিক্স ডানা মেলেছিল। এবার উড়তে শুরু করেছে।”</strong><span>এখন সেটাকে সবসময় আকাশে রাখার পালা।</span></aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="mission" id="philosophy">
+    <div class="container">
+      <div class="section-head"><div><div class="eyebrow">MISSION & VISION</div><h2>আমাদের <span class="gold">দর্শন</span></h2></div></div>
+      <div class="mission-grid">
+        <div class="mission-box">
+          <h3>ভিশন</h3>
+          <p>শিল্পের স্বাধীনতায়, গল্পের শক্তিতে—মঞ্চ থেকে চলচ্চিত্রে, বাংলাদেশ থেকে বিশ্বে একটি স্বতন্ত্র সাংস্কৃতিক কণ্ঠ হয়ে ওঠা।</p>
+        </div>
+        <div class="mission-box">
+          <h3>মিশন</h3>
+          <p>গল্প বলি, মানুষকে ছুঁই, সময়কে প্রশ্ন করি। থিয়েটার, চলচ্চিত্র ও বহুমাত্রিক শিল্পচর্চার মাধ্যমে মুক্ত, অন্তর্ভুক্তিমূলক ও দায়বদ্ধ সাংস্কৃতিক পরিসর তৈরি করা।</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stage">
+    <div class="container">
+      <div class="section-head"><div><div class="eyebrow">STAGE</div><h2>নাট্য <span class="gold">প্রযোজনা</span></h2></div><p>মঞ্চ আমাদের শিকড়। এখান থেকেই গল্পের যাত্রা শুরু।</p></div>
+      <div class="production">
+        <div class="poster"><span>অবরুদ্ধ</span></div>
+        <div class="production-info">
+          <div class="eyebrow">FIRST PRODUCTION</div>
+          <h3>অবরুদ্ধ</h3>
+          <div class="meta">জর্জ অরওয়েলের <em>Nineteen Eighty-Four</em>-এর ছায়া অবলম্বনে</div>
+          <p>থিয়েটার ফিনিক্সের প্রথম প্রযোজনা। ক্ষমতা, নিয়ন্ত্রণ, নজরদারি, সত্য ও মানুষের স্বাধীনতার প্রশ্নকে কেন্দ্র করে নির্মিত এক সমকালীন নাট্যভাষ্য।</p>
+          <p><strong>রচনা ও নির্দেশনা:</strong> শুভাশীষ বাপ্পী</p>
+          <div class="buttons"><a class="btn" href="#gallery">রিহার্সাল দেখুন</a></div>
+        </div>
+      </div>
+      <div class="cards" style="margin-top:25px">
+        <article class="card"><span class="num">02</span><h3>ক্যালাইডোস্কোপ</h3><p>বিভিন্ন রং, গল্প ও অনুভূতির সমন্বয়ে আসন্ন মঞ্চপ্রযোজনা।</p><a href="#contact">শীঘ্রই মঞ্চে →</a></article>
+        <article class="card"><span class="num">03</span><h3>ভবিষ্যৎ প্রযোজনা</h3><p>নতুন গল্প, নতুন ভাষা, নতুন মঞ্চ। ফিনিক্সের যাত্রা চলমান।</p><a href="#contact">সঙ্গে থাকুন →</a></article>
+        <article class="card"><span class="num">WORK</span><h3>মঞ্চচর্চা</h3><p>অভিনয়, নির্দেশনা, নাট্যরচনা ও দলগত সৃজনশীলতার ধারাবাহিক অনুশীলন।</p><a href="#workshop">কর্মশালা →</a></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="film" class="mission">
+    <div class="container">
+      <div class="section-head"><div><div class="eyebrow">CINEMA</div><h2>চলচ্চিত্র <span class="gold">নির্মাণ</span></h2></div><p>মঞ্চের অভিজ্ঞতাকে ক্যামেরার ভাষায় নিয়ে যাওয়া—ফিনিক্সের আরেকটি স্বপ্ন।</p></div>
+      <div class="production">
+        <div class="poster"><span>CRIME<br>NEVER BEST</span></div>
+        <div class="production-info">
+          <div class="eyebrow">ART FILM</div>
+          <h3>Crime Never Best</h3>
+          <p>থিয়েটার ফিনিক্সের চলচ্চিত্র নির্মাণের যাত্রার একটি প্রাথমিক পদক্ষেপ। ভবিষ্যতে স্বল্পদৈর্ঘ্য, আর্ট ফিল্ম ও অন্যান্য চলচ্চিত্র নির্মাণের কাজ আরও বিস্তৃত হবে।</p>
+          <div class="buttons" style="margin-top:25px"><a class="btn" href="#gallery">ফিল্ম গ্যালারি</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="workshop">
+    <div class="container">
+      <div class="section-head"><div><div class="eyebrow">WORKSHOP</div><h2>কর্মশালা ও <span class="gold">প্রশিক্ষণ</span></h2></div></div>
+      <div class="cards">
+        <article class="card"><span class="num">ACTING</span><h3>অভিনয়চর্চা</h3><p>শরীর, কণ্ঠ, আবেগ ও চরিত্র নির্মাণের মৌলিক অনুশীলন।</p></article>
+        <article class="card"><span class="num">THEATRE</span><h3>নাট্যচর্চা</h3><p>দলগত কাজ, দৃশ্য নির্মাণ, নাট্যভাষা ও মঞ্চশৃঙ্খলা।</p></article>
+        <article class="card"><span class="num">FILM</span><h3>চলচ্চিত্র নির্মাণ</h3><p>চিত্রনাট্য, ক্যামেরা, অভিনয় ও চলচ্চিত্রের ভাষা নিয়ে প্রাথমিক চর্চা।</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" class="mission">
+    <div class="container">
+      <div class="section-head"><div><div class="eyebrow">ARCHIVE</div><h2>গ্যালারি</h2></div><p>মঞ্চ, মহড়া, কর্মশালা ও চলচ্চিত্র নির্মাণের মুহূর্তগুলো।</p></div>
+      <div class="gallery">
+        <div class="gallery-item">মঞ্চ</div><div class="gallery-item">মহড়া</div>
+        <div class="gallery-item">কর্মশালা</div><div class="gallery-item">চলচ্চিত্র</div>
+      </div>
+      <p style="color:#777;margin-top:18px">নতুন ছবিগুলো যুক্ত হলে এই অংশটি পূর্ণাঙ্গ photo archive হিসেবে ব্যবহার করা যাবে।</p>
+    </div>
+  </section>
+
+  <section id="people">
+    <div class="container">
+      <div class="section-head"><div><div class="eyebrow">OUR PEOPLE</div><h2>আমাদের <span class="gold">মানুষ</span></h2></div></div>
+      <div class="people">
+        <div class="person"><div class="avatar">আ</div><h3>আহমেদ সামি</h3><small>সভাপতি</small></div>
+        <div class="person"><div class="avatar">ম</div><h3>মাহমুদা আলম</h3><small>সহ-সভাপতি</small></div>
+        <div class="person"><div class="avatar">ম</div><h3>মেহেদি হাসান তন্ময়</h3><small>সাধারণ সম্পাদক</small></div>
+        <div class="person"><div class="avatar">আ</div><h3>আব্দুল্লাহ</h3><small>সাংগঠনিক সম্পাদক</small></div>
+        <div class="person"><div class="avatar">আ</div><h3>আকাশ ভূঁইয়া</h3><small>প্রচার সম্পাদক</small></div>
+        <div class="person"><div class="avatar">আ</div><h3>আলমগীর অলিক</h3><small>কার্যনির্বাহী সদস্য</small></div>
+        <div class="person"><div class="avatar">স</div><h3>সাদমান শিহাব</h3><small>কার্যনির্বাহী সদস্য</small></div>
+        <div class="person"><div class="avatar">স</div><h3>সাকিব</h3><small>কার্যনির্বাহী সদস্য</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="news" class="mission">
+    <div class="container">
+      <div class="section-head"><div><div class="eyebrow">NEWS & ANNOUNCEMENTS</div><h2>সংবাদ ও <span class="gold">ঘোষণা</span></h2></div></div>
+      <div class="cards">
+        <article class="card"><span class="num">12 JUN 2026</span><h3>আনুষ্ঠানিক উত্থান</h3><p>১২ জুন ২০২৬-কে থিয়েটার ফিনিক্সের আনুষ্ঠানিক জন্মলগ্ন হিসেবে ঘোষণা করা হয়েছে।</p></article>
+        <article class="card"><span class="num">UPCOMING</span><h3>অবরুদ্ধ</h3><p>ফিনিক্সের প্রথম প্রযোজনা নিয়ে মঞ্চে আসার প্রস্তুতি চলছে।</p></article>
+        <article class="card"><span class="num">SOON</span><h3>ক্যালাইডোস্কোপ</h3><p>নতুন প্রযোজনার খবর শীঘ্রই প্রকাশিত হবে।</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="section-head"><div><div class="eyebrow">CONTACT</div><h2>যোগাযোগ <span class="gold">করুন</span></h2></div></div>
+      <div class="contact">
+        <div class="contact-box">
+          <h3>থিয়েটার ফিনিক্স</h3>
+          <p>📍 কিশোরগঞ্জ, বাংলাদেশ</p>
+          <p>📞 01777043386</p>
+          <p>💬 WhatsApp: 01966776879</p>
+          <p>🌐 আমাদের ঠিকানা একটি নির্দিষ্ট ভবন নয়—আমাদের ঠিকানা সারা বাংলাদেশ; ভবিষ্যতে দেশের সীমানা পেরিয়ে বিশ্ব।</p>
+        </div>
+        <div class="contact-box">
+          <h3>সামাজিক যোগাযোগ</h3>
+          <p>Facebook: <a class="gold" href="https://www.facebook.com/share/1HpNK6AtBh/" target="_blank" rel="noopener">Theatre Phoenix</a></p>
+          <p style="color:#777">YouTube ও Instagram শীঘ্রই যুক্ত করা হবে।</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container foot">
+    <div><strong>থিয়েটার ফিনিক্স</strong><br><span>মঞ্চ থেকে চলচ্চিত্রে, গল্প থেকে মানুষের কাছে।</span></div>
+    <div>© <span id="year"></span> Theatre Phoenix. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.querySelectorAll('.links a').forEach(a => a.addEventListener('click', () => document.querySelector('.links').classList.remove('open')));
+</script>
+</body>
+</html>
